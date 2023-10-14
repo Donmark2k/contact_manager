@@ -1,0 +1,15 @@
+{
+  "name": "contacts-backend-api",
+  "version": "1.0.0",
+  "description": "This is express project for my contacts api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "contact_manager"
+  },
+  "author": "chukwuemeka",
+  "license": "MIT"
+}
