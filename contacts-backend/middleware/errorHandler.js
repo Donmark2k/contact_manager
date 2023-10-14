@@ -1,13 +1,21 @@
+const {constants} = require ("../constants")
 const errorHandler = (err, req, res, next) => {
 const statusCode = res.StatusCode ? res.StatusCode:500;
 switch (statusCode) {
-    case 400:
+    case constants.VALIDATION_ERROR:
         res.json({title: "Validation Failed", message: err.message, stackTree: err.stack});
         break;
-    case 404: 
+    case constants.NOT_FOUND: 
     res.json({title: "Not Found", message: err.message, stackTree: err.stack});
+    case constants.FORBIDDEN: 
+    res.json({title: "Forbidden", message: err.message, stackTree: err.stack});
+    case constants.UNAUTHORIZED: 
+    res.json({title: "Unauthorized", message: err.message, stackTree: err.stack});
+    case constants.SERVER_ERROR: 
+    res.json({title: "server error", message: err.message, stackTree: err.stack});
     
     default:
+        console.log("No Error, All good!")
         break;
 };
 
