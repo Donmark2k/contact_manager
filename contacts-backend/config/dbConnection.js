@@ -9,8 +9,8 @@ const connectDb = async ()=>{
             dbName: 'contacts-backend',
             // useCreateIndex: true,
             // useFindAndModify: false,
-            ssl: true, 
-            tlsAllowInvalidCertificates: true, 
+            ssl: true,
+            tlsAllowInvalidCertificates: true,
         });
         console.log("Database connected: ", connect.connection.host, connect.connection.name)
     } catch (err) {
