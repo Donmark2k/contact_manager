@@ -7,6 +7,10 @@ const connectDb = async ()=>{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             dbName: 'contacts-backend',
+            // useCreateIndex: true,
+            // useFindAndModify: false,
+            ssl: true, 
+            tlsAllowInvalidCertificates: true, 
         });
         console.log("Database connected: ", connect.connection.host, connect.connection.name)
     } catch (err) {
