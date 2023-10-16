@@ -13,7 +13,7 @@ const connectDb = async ()=>{
             tlsAllowInvalidCertificates: true,
         });
         console.log("Database connected: ", connect.connection.host, connect.connection.name)
-    } catch (err) {
+    } catch(err) {
         console.log(err);
         process.exit(1);
     }

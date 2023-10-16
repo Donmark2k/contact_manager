@@ -1,25 +1,41 @@
 const asyncHandler = require("express-async-handler");
 const User = require ("../models/userModel");
+const bcrypt = require ("bcrypt");
 //@desc Register a user
 //@route POST /api/users/register
 //@access public
 const registerUser = asyncHandler(async(req, res) => {
     const {username, email, password} = req.body;
     if (!username || !email || !password) {
-        res.status(400);
-        throw new Error("All fields are required");
+        // res.status(400);
+        // throw new Error("All fields are required");
+        res.status(400).json({ error: "All fields are required" });
+        return;
     }
 
     const userAvailable = await User.findOne({ email});
     if (userAvailable) {
-        res.status(400);
-        throw new Error("User already registered");
+        res.status(400).json({ error: "User already registered" });
+        return;
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("Hashed Password: ", hashedPassword );
     const user = await User.create({
-        username, email,password,
+        username,
+        email,
+        password: hashedPassword,
     })
-    res.status(201).json(user);})
+    console.log(`User Created  ${user}`);
+
+    if (user) {
+        res.status(201).json({_id: user.id, email: user.email});
+    } else {
+        res.status(400);
+        throw new Error("User data is not valid");
+    }
+    res.status(201).json(user);
+})
 
 //@desc login user
 //@route POST /api/users/login
